@@ -15,7 +15,6 @@ app.set('view engine', 'handlebars');
 app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }));
 
 app.get( '/', ( req, res ) => res.render( 'form' ) )
-app.get( '/thank-you', ( req, res ) => res.status( 303 ).render( 'thank-you' ) )
 
 const client = require('@jsreport/nodejs-client')('http://localhost:5488');
 
@@ -32,10 +31,6 @@ app.post( '/form_post',  ( req, res , next) => {
     .then(console.log('test', req.body))
     .catch(next)
 })
-
-app.post( '/form_post_test', ( req, res ) => {
-    console.log(JSON.parse(JSON.stringify(req.body)))
-    res.redirect( 303, 'thank-you' )})
 
 app.use( ( req, res ) => res.status( 404 ).render( '404' ) )
 app.use( ( err, req, res, next ) => res.status( 500 ).render( 500 ) )
